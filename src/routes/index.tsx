@@ -15,11 +15,20 @@ export default function Home() {
         onInput={(e) => {
           setResult(chrono.parse(e.currentTarget.value));
         }}
-        required
       />
 
       <div>
-        <pre>{JSON.stringify(result() ?? 'Result', null, 2)}</pre>
+        <pre>
+          {JSON.stringify(
+            result()?.map((r) => ({
+              ...r,
+              start: r.start.date(),
+              end: r.end?.date(),
+            })) ?? 'Result',
+            null,
+            2
+          )}
+        </pre>
       </div>
     </main>
   );
